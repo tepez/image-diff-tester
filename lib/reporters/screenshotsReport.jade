@@ -1,0 +1,55 @@
+mixin Suit(suite, depth)
+    if suite._hasScreenshots
+        .report-suite
+            h3= suite.description
+            for specItr in suite._specs
+                +Spec(specItr)
+            for suiteItr in suite._suites
+                +Suit(suiteItr, depth+1)
+
+mixin Spec(spec)
+    if spec._hasScreenshots
+        .report-spec
+            h4= spec.description
+            for screenshotItr in spec._screenshots
+                +Screenshot(screenshotItr)
+
+mixin Screenshot(screenshot)
+    .report-screenshot
+        h4= screenshot.name
+        if screenshot.current
+            // Test report
+            .row
+                .col-sm-4
+                    img.img-responsive(src=screenshot.base, title='Base')
+                if screenshot.diff && screenshot.misMatchPercentage != 0
+                    .col-sm-4
+                        img.img-responsive(src=screenshot.diff, title='Diff, mismatch=' + screenshot.misMatchPercentage + '%')
+                    .col-sm-4
+                        img.img-responsive(src=screenshot.current, title='Current')
+        else
+            // Base report - only show base images so they can take the entire width
+            img.img-responsive(src=screenshot.base, title='Base')
+
+
+doctype html
+html(lang="en")
+    head
+        title Screenshots report
+        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==", crossorigin="anonymous")
+
+        style.
+            .report-suite, .report-spec, .report-screenshot {
+                margin-left: 10px;
+            }
+
+    body
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    span.navbar-brand Screenshots report
+
+        .container-fluid
+            for suit in suites
+                +Suit(suit, 0)
+

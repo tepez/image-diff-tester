@@ -1,0 +1,31 @@
+{
+  "name": "image-diff-tester",
+  "version": "0.1.0",
+  "description": "Utilities for writing unit tests on image differences in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tepez/image-diff-tester.git"
+  },
+  "author": "Tom Tepez Yam <tomyam1@gmail.com> (https://github.com/tepez)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tepez/image-diff-tester/issues"
+  },
+  "homepage": "https://github.com/tepez/image-diff-tester#readme",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "del": "^2.2.1",
+    "isstream": "^0.1.2",
+    "jade": "^1.11.0",
+    "joi": "^9.0.4",
+    "lodash": "^4.14.2",
+    "mkdirp": "^0.5.1",
+    "node-resemble-js": "0.0.5",
+    "pngjs": "^3.0.0",
+    "stream-to-array": "^2.3.0"
+  }
+}
